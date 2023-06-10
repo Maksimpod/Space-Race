@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float _speed;
  
-
     void Update()
     {
         Vector2 position = transform.position;
@@ -28,6 +27,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             gameObject.SetActive(false);
+            collision.gameObject.GetComponent<FuelManager>().DecreaseFuel();
         }
     }
 }

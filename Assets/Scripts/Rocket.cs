@@ -16,7 +16,7 @@ public class Rocket : MonoBehaviour
         _objectWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
         _objectHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
     }
-    void Update()
+    void FixedUpdate()
     {
         //transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, 0f, 0f));
         transform.position += new Vector3(_speed * Input.GetAxisRaw("Horizontal"), 0f, 0f);
