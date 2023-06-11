@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +13,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverMenu;
     [SerializeField] private GameObject _heightText;
     [SerializeField] private GameObject _recordScoreText;
+    [SerializeField] private GameObject _pausedText;
+    [SerializeField] private Image _pauseImage;
 
     private bool gameStarted = false;
+    private bool paused = false;
+    private Sprite[] pauseButtonSprites;
     void Start()
     {
         Time.timeScale = 0;
+        pauseButtonSprites = Resources.LoadAll<Sprite>("pause");
     }
 
     private void OnEnable()
@@ -56,5 +61,23 @@ public class GameManager : MonoBehaviour
     {
         _heightText.SetActive(true);
         _recordScoreText.SetActive(false);
+    }
+
+    public void PauseResumeGame()
+    {
+        if (!paused)
+        {
+            Time.timeScale = 0;
+            paused = true;
+            _pausedText.SetActive(true);
+            _pauseImage.sprite = pauseButtonSprites[1];
+        }
+        else
+        {
+            Time.timeScale = 1;
+            paused = false;
+            _pausedText.SetActive(false);
+            _pauseImage.sprite = pauseButtonSprites[0];
+        }
     }
 }
