@@ -6,8 +6,7 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private float _spawnDelay;
 
-    private float previousSpawnPoint = 100f;
-    private float spawnOffset = 0.65f;
+    private float spawnOffset = 0.85f;
 
     private void Start()
     {
@@ -16,14 +15,14 @@ public class CoinSpawner : MonoBehaviour
 
     IEnumerator Generator()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(3f);
         while (true)
         {
             float xToSpawn = Random.Range(-2.8f, 2.8f);
-
-            if (Mathf.Abs(xToSpawn - previousSpawnPoint) < spawnOffset)
+            float prev = EnemySpawner.previousSpawnPoint;
+            if (Mathf.Abs(xToSpawn - prev) < spawnOffset)
             {
-                float resultOffest = spawnOffset - Mathf.Abs(xToSpawn - previousSpawnPoint);
+                float resultOffest = spawnOffset - Mathf.Abs(xToSpawn - prev);
                 xToSpawn += xToSpawn > 0f ? resultOffest : -resultOffest;
 
                 if (xToSpawn > 2.8f)
@@ -42,7 +41,7 @@ public class CoinSpawner : MonoBehaviour
             {
                 coin.transform.position = new Vector2(xToSpawn, transform.position.y);
                 coin.SetActive(true);
-                previousSpawnPoint = xToSpawn;
+                prev = xToSpawn;
             }
             yield return new WaitForSeconds(_spawnDelay);
         }

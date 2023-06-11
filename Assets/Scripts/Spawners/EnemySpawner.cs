@@ -6,8 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float _spawnDelay;
 
-    private float previousSpawnPoint = 100f;
-    private float spawnOffset = 0.65f;
+    public static float previousSpawnPoint = 100f;
+    private float spawnOffset = 0.85f;
 
     private void Start()
     {
@@ -42,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemy != null)
             {
                 enemy.transform.position = new Vector2(xToSpawn, transform.position.y);
+                enemy.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
                 enemy.SetActive(true);
                 previousSpawnPoint = xToSpawn;
             }

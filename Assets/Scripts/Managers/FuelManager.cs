@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class FuelManager : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
+    [SerializeField] private Text _fuelValue;
+
+    private float maxFuel = 100f;
     private float currentFuel = 100f;
+
     public static event Action OnRanOutOfFuel;
 
     private void Start()
@@ -18,11 +22,12 @@ public class FuelManager : MonoBehaviour
     {
         currentFuel -= 20f;
         _slider.value = currentFuel;
+        _fuelValue.text = Convert.ToString(currentFuel > 0 ? currentFuel / maxFuel * 100 : 0);
     }
 
     public void IncreaseFuel()
     {
-        currentFuel = 100f;
+        currentFuel = maxFuel;
         _slider.value = currentFuel;
     }
 
@@ -43,6 +48,7 @@ public class FuelManager : MonoBehaviour
         {
             currentFuel -= 0.5f;
             _slider.value = currentFuel;
+            _fuelValue.text = Convert.ToString(currentFuel / maxFuel * 100);
             yield return new WaitForSeconds(0.2f);
         }
         OnRanOutOfFuel?.Invoke();

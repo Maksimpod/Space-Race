@@ -6,8 +6,7 @@ public class FuelSpawner : MonoBehaviour
 {
     [SerializeField] private float _spawnDelay;
 
-    private float previousSpawnPoint = 100f;
-    private float spawnOffset = 0.65f;
+    private float spawnOffset = 0.85f;
 
     private void Start()
     {
@@ -20,10 +19,10 @@ public class FuelSpawner : MonoBehaviour
         while (true)
         {
             float xToSpawn = Random.Range(-2.8f, 2.8f);
-
-            if (Mathf.Abs(xToSpawn - previousSpawnPoint) < spawnOffset)
+            float prev = EnemySpawner.previousSpawnPoint;
+            if (Mathf.Abs(xToSpawn - prev) < spawnOffset)
             {
-                float resultOffest = spawnOffset - Mathf.Abs(xToSpawn - previousSpawnPoint);
+                float resultOffest = spawnOffset - Mathf.Abs(xToSpawn - prev);
                 xToSpawn += xToSpawn > 0f ? resultOffest : -resultOffest;
 
                 if (xToSpawn > 2.8f)
@@ -42,7 +41,7 @@ public class FuelSpawner : MonoBehaviour
             {
                 fuel.transform.position = new Vector2(xToSpawn, transform.position.y);
                 fuel.SetActive(true);
-                previousSpawnPoint = xToSpawn;
+                prev = xToSpawn;
             }
             _spawnDelay += 10f;
             yield return new WaitForSeconds(_spawnDelay);

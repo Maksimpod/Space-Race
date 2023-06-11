@@ -5,10 +5,10 @@ using UnityEngine;
 public class BackgroundManager : MonoBehaviour
 {
     [SerializeField] private Color[] _colors;
-    [SerializeField] private SpriteRenderer _obj;
-    [SerializeField] private Renderer _obj2;
+    [SerializeField] private SpriteRenderer _colorBackground;
+    [SerializeField] private Renderer _spriteBackground;
 
-    private float transitionTime = 3f;
+    private float transitionTime = 6f;
 
     private void OnEnable()
     {
@@ -27,9 +27,9 @@ public class BackgroundManager : MonoBehaviour
         }
         else
         {
-            _obj2.gameObject.SetActive(true);
-            _obj2.material.mainTexture.wrapMode = TextureWrapMode.Repeat;
-            _obj.gameObject.SetActive(false);
+            _spriteBackground.gameObject.SetActive(true);
+            _spriteBackground.material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+            _colorBackground.gameObject.SetActive(false);
             StartCoroutine(BackgroundScroller());
         }
     }
@@ -42,7 +42,7 @@ public class BackgroundManager : MonoBehaviour
         while (timeElapsed < totalTime)
         {
             timeElapsed += Time.deltaTime;
-            _obj.color = Color.Lerp(_obj.color, _colors[index], timeElapsed / totalTime);
+            _colorBackground.color = Color.Lerp(_colorBackground.color, _colors[index], timeElapsed / totalTime);
             yield return null;
         }
     }
@@ -51,9 +51,8 @@ public class BackgroundManager : MonoBehaviour
     {
         while (true)
         {
-            _obj2.material.mainTextureOffset += new Vector2(0, 0.05f * Time.deltaTime);
+            _spriteBackground.material.mainTextureOffset += new Vector2(0, 0.02f * Time.deltaTime);
             yield return null;
         }
-        
     }
 }
