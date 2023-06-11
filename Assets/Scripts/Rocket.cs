@@ -11,6 +11,8 @@ public class Rocket : MonoBehaviour
     private float _objectWidth;
     private float _objectHeight;
 
+    private Touch touch;
+
     private void Start()
     {
         _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -29,8 +31,16 @@ public class Rocket : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, 0f, 0f));
-        transform.position += new Vector3(_speed * Input.GetAxisRaw("Horizontal"), 0f, 0f);
+        if (Input.touchCount > 0)
+        {
+            touch = Input.GetTouch(0);
+            if(touch.phase == TouchPhase.Moved)
+            {
+                transform.position += new Vector3(_speed / 6 * touch.deltaPosition.x, 0f, 0f);
+            }
+
+            //transform.position += new Vector3(_speed * Input.GetAxisRaw("Horizontal"), 0f, 0f);
+        }
     }
 
     private void LateUpdate()
