@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundController : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    void Update()
+    private void FixedUpdate()
     {
         Vector2 position = transform.position;
 

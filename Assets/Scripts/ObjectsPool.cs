@@ -1,9 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsPool : MonoBehaviour
 {
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _coinPrefab;
+    [SerializeField] private GameObject _fuelPrefab;
+
     public static ObjectsPool instance;
 
     private List<GameObject> _enemyPool = new List<GameObject>();
@@ -15,10 +18,6 @@ public class ObjectsPool : MonoBehaviour
     private List<GameObject> _fuelPool = new List<GameObject>();
     private int _fuelPoolSize = 1;
 
-    [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private GameObject _coinPrefab;
-    [SerializeField] private GameObject _fuelPrefab;
-
     private void Awake()
     {
         if (instance == null)
@@ -26,7 +25,7 @@ public class ObjectsPool : MonoBehaviour
             instance = this;
         }
     }
-    void Start()
+    private void Start()
     {
         CreatePool(_enemyPoolSize, _enemyPool, _enemyPrefab);
         CreatePool(_coinPoolSize, _coinPool, _coinPrefab);
@@ -43,7 +42,22 @@ public class ObjectsPool : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledEnemy()
+    public GameObject GetPool(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return GetPooledEnemy();
+            case 1:
+                return GetPooledCoin();
+            case 2:
+                return GetPooledFuel();
+            default:
+                return null;
+        }
+    }
+
+    private GameObject GetPooledEnemy()
     {
         for (int i = 0; i < _enemyPool.Count; i++)
         {
@@ -55,7 +69,7 @@ public class ObjectsPool : MonoBehaviour
         return null;
     }
 
-    public GameObject GetPooledCoin()
+    private GameObject GetPooledCoin()
     {
         for (int i = 0; i < _coinPool.Count; i++)
         {
@@ -67,7 +81,7 @@ public class ObjectsPool : MonoBehaviour
         return null;
     }
 
-    public GameObject GetPooledFuel()
+    private GameObject GetPooledFuel()
     {
         for (int i = 0; i < _fuelPool.Count; i++)
         {

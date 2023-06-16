@@ -1,35 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CoinController : MonoBehaviour
+public class CoinController
 {
-    public static event Action OnCoinCollect;
+    private CoinModel _coinModel;
 
-    [SerializeField] private float _speed;
-
-    void Update()
+    public CoinController(CoinModel coinModel)
     {
-        Vector2 position = transform.position;
-
-        position = new Vector2(position.x, position.y - _speed * Time.deltaTime);
-        transform.position = position;
-
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-
-        if (transform.position.y < min.y)
-        {
-            gameObject.SetActive(false);
-        }
+        _coinModel = coinModel;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void UpdateCoins()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            gameObject.SetActive(false);
-            OnCoinCollect?.Invoke();
-        }
+        _coinModel.coins += 1;
+        _coinModel.GetHUD.UpdateCoinText(_coinModel.coins);
     }
 }

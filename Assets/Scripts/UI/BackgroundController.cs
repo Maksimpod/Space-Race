@@ -1,23 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundManager : MonoBehaviour
+public class BackgroundController : MonoBehaviour
 {
     [SerializeField] private Color[] _colors;
     [SerializeField] private SpriteRenderer _colorBackground;
     [SerializeField] private Renderer _spriteBackground;
 
     private float transitionTime = 6f;
-
-    private void OnEnable()
-    {
-        HeightManager.OnHeightReached += ChangeBackground;
-    }
-    private void OnDisable()
-    {
-        HeightManager.OnHeightReached -= ChangeBackground;
-    }
 
     public void ChangeBackground(int index)
     {
@@ -34,7 +24,7 @@ public class BackgroundManager : MonoBehaviour
         }
     }
 
-    IEnumerator ColorChanger(int index)
+    private IEnumerator ColorChanger(int index)
     {
         float timeElapsed = 0f;
         float totalTime = transitionTime;
@@ -47,7 +37,7 @@ public class BackgroundManager : MonoBehaviour
         }
     }
 
-    IEnumerator BackgroundScroller()
+    private IEnumerator BackgroundScroller()
     {
         while (true)
         {

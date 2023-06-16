@@ -133,9 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 130476159}
   - component: {fileID: 130476158}
-  - component: {fileID: 130476160}
-  - component: {fileID: 130476161}
+  - component: {fileID: 130476163}
   - component: {fileID: 130476162}
+  - component: {fileID: 130476161}
+  - component: {fileID: 130476160}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -155,12 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e447779c539b14ca432d5de1360b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 1233538389}
-  _gameOverMenu: {fileID: 287176468}
-  _heightText: {fileID: 898609622}
-  _recordScoreText: {fileID: 972111181}
-  _pausedText: {fileID: 1208508677}
-  _pauseImage: {fileID: 777197225}
+  _pauseInterface: {fileID: 621523530}
+  _hud: {fileID: 621523529}
+  _heightModel: {fileID: 130476161}
 --- !u!4 &130476159
 Transform:
   m_ObjectHideFlags: 0
@@ -185,16 +183,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 130476157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e6ff746fc5eb4eb8b7efef7851641, type: 3}
+  m_Script: {fileID: 11500000, guid: 49f1ca7d2002b6648847ed7eb4cf0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 898609624}
-  _totalScoreText: {fileID: 998450152}
-  _recordScoreText: {fileID: 972111183}
-  _boosts:
-  - {fileID: 135484670}
-  - {fileID: 919945765}
-  - {fileID: 1381594493}
+  _colors:
+  - {r: 0.18039216, g: 0.54509807, b: 0.8784314, a: 1}
+  - {r: 0.18039216, g: 0.39215687, b: 0.76862746, a: 1}
+  - {r: 0.19215687, g: 0.2784314, b: 0.6392157, a: 1}
+  _colorBackground: {fileID: 2145717748}
+  _spriteBackground: {fileID: 1666688367}
 --- !u!114 &130476161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,10 +201,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 130476157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befcaa5da3faf574a92591c3af602db5, type: 3}
+  m_Script: {fileID: 11500000, guid: 519296a8e8625984495571c2ad427dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 1742924999}
+  _heightFlags: c8000000f401000020030000dc050000
+  _hud: {fileID: 621523529}
+  _backgroundController: {fileID: 130476160}
 --- !u!114 &130476162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,15 +216,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 130476157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf084dccb3d73474cbbf2c093b079606, type: 3}
+  m_Script: {fileID: 11500000, guid: a4aac80865620e3409bcd159d12fafe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colors:
-  - {r: 0.18039216, g: 0.54509807, b: 0.8784314, a: 1}
-  - {r: 0.18039216, g: 0.39215687, b: 0.76862746, a: 1}
-  - {r: 0.19215687, g: 0.2784314, b: 0.6392157, a: 1}
-  _colorBackground: {fileID: 2145717748}
-  _spriteBackground: {fileID: 1666688367}
+  _hud: {fileID: 621523529}
+--- !u!114 &130476163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130476157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0003b789245af34ca3b9095c8b1f917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxFuel: 100
+  _gameOverMenu: {fileID: 1974635608}
+  _hud: {fileID: 621523529}
+  _heightModel: {fileID: 130476161}
 --- !u!1 &135484670
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,9 +320,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 130476160}
-        m_TargetAssemblyTypeName: HeightManager, Assembly-CSharp
-        m_MethodName: BoostOnStart
+      - m_Target: {fileID: 130476161}
+        m_TargetAssemblyTypeName: HeightModel, Assembly-CSharp
+        m_MethodName: set_multiplier
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -529,10 +539,9 @@ GameObject:
   m_Component:
   - component: {fileID: 340607555}
   - component: {fileID: 340607554}
-  - component: {fileID: 340607553}
   - component: {fileID: 340607556}
   - component: {fileID: 340607557}
-  - component: {fileID: 340607558}
+  - component: {fileID: 340607560}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Player
@@ -540,20 +549,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &340607553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340607552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23310bc91f3660349bb68b71ab6e67c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 0.08
-  _rb: {fileID: 340607557}
 --- !u!212 &340607554
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -638,7 +633,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3, y: 3.69}
+    oldSize: {x: 1.06, y: 3.62}
     newSize: {x: 1.3, y: 3.69}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -667,8 +662,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &340607558
+  m_Constraints: 6
+--- !u!114 &340607560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -677,11 +672,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 340607552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b11f1a9a5296e459ff773b0340959d, type: 3}
+  m_Script: {fileID: 11500000, guid: 491fb233e8b3c3f4fbe9c2c26f2e0d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 681160347}
-  _fuelValue: {fileID: 1697896372}
+  _movementSpeed: 118.9
 --- !u!1 &511127465
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +852,8 @@ GameObject:
   - component: {fileID: 621523527}
   - component: {fileID: 621523526}
   - component: {fileID: 621523525}
+  - component: {fileID: 621523529}
+  - component: {fileID: 621523530}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -924,7 +920,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &621523528
 RectTransform:
@@ -957,6 +953,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &621523529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621523524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbbf9566d9a2d84db1d68693dc6fd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 681160347}
+  _fuelValue: {fileID: 1697896372}
+  _heightText: {fileID: 898609624}
+  _totalScoreText: {fileID: 998450152}
+  _recordScoreText: {fileID: 972111183}
+  _coinsText: {fileID: 1742924999}
+  _boosts:
+  - {fileID: 135484670}
+  - {fileID: 919945765}
+  - {fileID: 1381594493}
+  _startButton: {fileID: 1233538389}
+--- !u!114 &621523530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621523524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d72145eea45dc14ab8780f110b63105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pausedText: {fileID: 1208508677}
+  _pauseImage: {fileID: 777197225}
 --- !u!1 &681160344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,9 +1528,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 130476160}
-        m_TargetAssemblyTypeName: HeightManager, Assembly-CSharp
-        m_MethodName: BoostOnStart
+      - m_Target: {fileID: 130476161}
+        m_TargetAssemblyTypeName: HeightModel, Assembly-CSharp
+        m_MethodName: set_multiplier
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2230,18 +2263,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 130476160}
-        m_TargetAssemblyTypeName: HeightManager, Assembly-CSharp
-        m_MethodName: DisableBoostButtons
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1251179782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,9 +2546,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 130476160}
-        m_TargetAssemblyTypeName: HeightManager, Assembly-CSharp
-        m_MethodName: BoostOnStart
+      - m_Target: {fileID: 130476161}
+        m_TargetAssemblyTypeName: HeightModel, Assembly-CSharp
+        m_MethodName: set_multiplier
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3085,9 +3106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1971446635}
-  - component: {fileID: 1971446634}
   - component: {fileID: 1971446636}
-  - component: {fileID: 1971446637}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -3095,19 +3114,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1971446634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971446633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebaafbe782915a44690104d4592249fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnDelay: 1.3
 --- !u!4 &1971446635
 Transform:
   m_ObjectHideFlags: 0
@@ -3132,23 +3138,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1971446633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5365f9ebfe78ea342b951607047cc436, type: 3}
+  m_Script: {fileID: 11500000, guid: ef67a3071b36e054aa943b4eb77ad818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnDelay: 5
---- !u!114 &1971446637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971446633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54902b13e39aa14bb5f388aa926de5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnDelay: 10
+  _spawnDelays:
+  - 1.5
+  - 5
+  - 10
+  _initialDelays:
+  - 1
+  - 5
+  - 13
 --- !u!1 &1974635603
 GameObject:
   m_ObjectHideFlags: 0
@@ -3161,6 +3161,7 @@ GameObject:
   - component: {fileID: 1974635607}
   - component: {fileID: 1974635606}
   - component: {fileID: 1974635605}
+  - component: {fileID: 1974635608}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -3250,6 +3251,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &1974635608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974635603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f11d76f0dcfe7489676803dbf9154b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameOverMenu: {fileID: 287176468}
 --- !u!1 &1995575095
 GameObject:
   m_ObjectHideFlags: 0

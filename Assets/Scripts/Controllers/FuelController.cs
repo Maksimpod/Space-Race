@@ -1,35 +1,37 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FuelController : MonoBehaviour
+public class FuelController 
 {
-    public static event Action OnFuelCollect;
+    private FuelModel _fuelModel;
 
-    [SerializeField] private float _speed;
-
-    void Update()
+    public FuelController(FuelModel fuelModel)
     {
-        Vector2 position = transform.position;
-
-        position = new Vector2(position.x, position.y - _speed * Time.deltaTime);
-        transform.position = position;
-
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-
-        if (transform.position.y < min.y)
-        {
-            gameObject.SetActive(false);
-        }
+        _fuelModel = fuelModel;
+    }
+    public void DecreaseFuel()
+    {
+        _fuelModel._currentFuel -= 20f;
+        _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void IncreaseFuel()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        _fuelModel._currentFuel = _fuelModel.MaxFuel;
+        _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
+    }
+
+    public IEnumerator Fuel()
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        while (_fuelModel._currentFuel > 0f)
         {
-            gameObject.SetActive(false);
-            OnFuelCollect?.Invoke();
+            _fuelModel._currentFuel -= 0.5f;
+            _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
+            yield return new WaitForSeconds(0.2f);
         }
+        _fuelModel.GameOverMenu.EnableGameOverMenu();
+        _fuelModel.GetHeightModel.GetHeightController.UpdateTotalScore();
     }
 }
