@@ -11,7 +11,7 @@ public class RocketMovement
 
     public void Movement()
     {
-        var velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _rocketModel.MovementSpeed * Time.fixedDeltaTime, 0f);
+        var velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _rocketModel.MovementSpeed, 0f);
         _rocketModel.GetRigidbody2D.velocity = velocity;
     }
 

@@ -204,8 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519296a8e8625984495571c2ad427dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heightFlags: c8000000f401000020030000dc050000
   _hud: {fileID: 621523529}
+  _heightFlags: c8000000f401000020030000dc050000
   _backgroundController: {fileID: 130476160}
 --- !u!114 &130476162
 MonoBehaviour:
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnDelays:
-  - 1.5
+  - 1.3
   - 5
   - 10
   _initialDelays:

@@ -4,7 +4,7 @@ using UnityEngine;
 public class RocketModel : MonoBehaviour
 {
     [Header("Movement data")]
-    [SerializeField] [Range(50, 150)] private float _movementSpeed;
+    [SerializeField] [Range(0, 5)] private float _movementSpeed;
 
     private RocketMovement _rocketMovement;
     private Rigidbody2D _rigidbody;
