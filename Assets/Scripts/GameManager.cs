@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     
     public void Restart()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PauseResumeGame()

@@ -21,7 +21,7 @@ public class HeightController
         yield return new WaitForSeconds(0.01f);
         while (true)
         {
-            _heightModel.height += 1;
+            _heightModel.height += _heightModel.engineMultiplier;
             _heightModel.GetHUD.SetHeightText(_heightModel.height);
             yield return new WaitForSeconds(0.1f);
         }

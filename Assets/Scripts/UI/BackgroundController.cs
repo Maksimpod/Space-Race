@@ -7,6 +7,8 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private SpriteRenderer _colorBackground;
     [SerializeField] private Renderer _spriteBackground;
 
+    private int[] _heightFlags = {200, 500, 800, 1500};
+
     private float transitionTime = 6f;
 
     public void ChangeBackground(int index)

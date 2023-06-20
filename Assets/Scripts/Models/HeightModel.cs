@@ -13,10 +13,13 @@ public class HeightModel : MonoBehaviour
 
     private HeightController _heightController;
 
+    private int _engineMultiplier = 1;
+
     public int[] heightFlags => _heightFlags;
     public HUD GetHUD => _hud;
     public HeightController GetHeightController => _heightController;
     public BackgroundController GetBackgroundController => _backgroundController;
+    public int engineMultiplier => _engineMultiplier;
 
     public int height { get; set; } = 0;
     public int recordHeight { get; set; } = 0;
