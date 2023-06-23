@@ -5,7 +5,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private PauseInterface _pauseInterface;
     [SerializeField] private HUD _hud;
-    [SerializeField] private HeightModel _heightModel;
+    
+    private HeightModel _heightModel;
+    private CoinModel _coinModel;
+    private FuelModel _fuelModel;
+
+    private SaveController _saveController;
 
     private bool gameStarted = false;
     private bool paused = false;
@@ -13,6 +18,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 0;
+
+        _heightModel = GetComponent<HeightModel>();
+        _coinModel = GetComponent<CoinModel>();
+        _fuelModel = GetComponent<FuelModel>();
+
+        _saveController = new SaveController(_heightModel, _coinModel, _fuelModel);
     }
 
     public void StartGame()
@@ -30,6 +41,7 @@ public class GameManager : MonoBehaviour
     
     public void Restart()
     {
+        _saveController.SaveOnReload();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

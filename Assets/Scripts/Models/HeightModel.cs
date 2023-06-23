@@ -30,6 +30,9 @@ public class HeightModel : MonoBehaviour
     {
         _heightController = new HeightController(this);
 
+        recordHeight = PlayerPrefs.GetInt("RecordHeight");
+        _engineMultiplier = PlayerPrefs.GetInt("EngineMultiplier");
+
         _hud.SetRecordText(recordHeight);
 
         StartCoroutine(_heightController.Score());

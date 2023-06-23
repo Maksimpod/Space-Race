@@ -24,6 +24,10 @@ public class FuelModel : MonoBehaviour
     {
         _fuelController = new FuelController(this);
 
+        _maxFuel = PlayerPrefs.GetFloat("MaxFuel");
+
+        _currentFuel = _maxFuel;
+
         StartCoroutine(_fuelController.Fuel());
     }
 }

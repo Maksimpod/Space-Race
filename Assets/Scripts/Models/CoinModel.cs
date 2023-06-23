@@ -13,5 +13,8 @@ public class CoinModel : MonoBehaviour
     private void Start()
     {
         _coinController = new CoinController(this);
+
+        coins = PlayerPrefs.GetInt("Coins");
+        _coinController.UpdateCoins();
     }
 }

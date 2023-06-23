@@ -54,7 +54,7 @@ public class HeightController
 
     public void UpdateTotalScore()
     {
-        _heightModel.recordHeight = _heightModel.height;
         _heightModel.GetHUD.SetTotalScoreText(_heightModel.height, _heightModel.recordHeight);
+        _heightModel.recordHeight = _heightModel.height > _heightModel.recordHeight ? _heightModel.height : _heightModel.recordHeight;
     }
 }
