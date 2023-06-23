@@ -9,29 +9,44 @@ public class FuelController
     {
         _fuelModel = fuelModel;
     }
+
+    public void InitializeUpgradeButton()
+    {
+        _fuelModel.FuelUpgradeButton.onClick.AddListener(UpgradeFuel);
+        _fuelModel.GetShopMenu.UpdateFuelText(_fuelModel._fuelLevel);
+    }
+
     public void DecreaseFuel()
     {
-        _fuelModel._currentFuel -= 20f;
-        _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
+        _fuelModel.CurrentFuel -= _fuelModel._maxFuel / 5;
     }
 
     public void IncreaseFuel()
     {
-        _fuelModel._currentFuel = _fuelModel.MaxFuel;
-        _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
+        _fuelModel.CurrentFuel = _fuelModel._maxFuel;
     }
 
     public IEnumerator Fuel()
     {
         yield return new WaitForSeconds(0.01f);
 
-        while (_fuelModel._currentFuel > 0f)
+        while (_fuelModel.CurrentFuel > 0f)
         {
-            _fuelModel._currentFuel -= 0.5f;
-            _fuelModel.GetHUD.UpdateFuelHUD(_fuelModel._currentFuel, _fuelModel.MaxFuel);
+            _fuelModel.CurrentFuel -= 0.5f;
             yield return new WaitForSeconds(0.2f);
         }
         _fuelModel.GameOverMenu.EnableGameOverMenu();
         _fuelModel.GetHeightModel.GetHeightController.UpdateTotalScore();
+    }
+
+    public void UpgradeFuel()
+    {
+        if (_fuelModel.GetCoinModel.Coins >= _fuelModel._fuelLevel)
+        {
+            _fuelModel.GetCoinModel.Coins -= _fuelModel._fuelLevel;
+            _fuelModel._maxFuel += 50;
+            _fuelModel._fuelLevel += 1;
+            _fuelModel.GetShopMenu.UpdateFuelText(_fuelModel._fuelLevel);
+        }
     }
 }

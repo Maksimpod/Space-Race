@@ -9,7 +9,6 @@ public class CoinController
 
     public void UpdateCoins()
     {
-        _coinModel.coins += 1;
-        _coinModel.GetHUD.UpdateCoinText(_coinModel.coins);
+        _coinModel.Coins += 1;
     }
 }

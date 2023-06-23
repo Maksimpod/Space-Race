@@ -6,15 +6,21 @@ public class CoinModel : MonoBehaviour
 
     private CoinController _coinController;
 
-    public HUD GetHUD => _hud;
+    private int _coins = 0;
+
     public CoinController GetCoinController => _coinController;
-    public int coins { get; set; } = 0;
+    public int Coins { 
+        get { return _coins;  } 
+        set {
+            _coins = value;
+            _hud.UpdateCoinText(_coins);
+        }
+    }
 
     private void Start()
     {
         _coinController = new CoinController(this);
 
-        coins = PlayerPrefs.GetInt("Coins");
-        _coinController.UpdateCoins();
+        Coins = PlayerPrefs.GetInt("Coins");
     }
 }

@@ -62,8 +62,8 @@ public class HUD : MonoBehaviour
     }
     public void UpdateFuelHUD(float currFuel, float maxFuel)
     {
-        _slider.value = currFuel;
-        _fuelValue.text = Convert.ToString(currFuel > 0 ? currFuel / maxFuel * 100 : 0);
+        _slider.value = currFuel/maxFuel * 100;
+        _fuelValue.text = Convert.ToString(currFuel > 0 ? Math.Round(currFuel / maxFuel * 100, 1) : 0);
     }
     
     public void DeactivateStartButton()

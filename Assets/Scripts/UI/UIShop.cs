@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIShop : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI _engineUpgradeText;
+    [SerializeField] private TextMeshProUGUI _fuelUpgradeText;
+
+    public void UpdateEngineText(int level)
     {
-        
+        _engineUpgradeText.text = "Engine Lv. " + level;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateFuelText(int level)
     {
-        
+        _fuelUpgradeText.text = "Fuel Lv. " + level;
     }
 }

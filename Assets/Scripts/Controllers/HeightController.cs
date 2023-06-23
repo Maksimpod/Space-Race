@@ -10,6 +10,12 @@ public class HeightController
         _heightModel = heightModel;
     }
 
+    public void InitializeUpgradeButton()
+    {
+        _heightModel.EngineUpgradeButton.onClick.AddListener(UpgradeEngine);
+        _heightModel.GetShopMenu.UpdateEngineText(_heightModel.engineMultiplier);
+    }
+
     public void BoostOnStart()
     {
         _heightModel.StartCoroutine(ScoreBooster(_heightModel.multiplier));
@@ -21,8 +27,7 @@ public class HeightController
         yield return new WaitForSeconds(0.01f);
         while (true)
         {
-            _heightModel.height += _heightModel.engineMultiplier;
-            _heightModel.GetHUD.SetHeightText(_heightModel.height);
+            _heightModel.Height += _heightModel.engineMultiplier;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -31,7 +36,7 @@ public class HeightController
     {
         while (_heightModel.triggerIndex < 4)
         {
-            if (_heightModel.height > _heightModel.heightFlags[_heightModel.triggerIndex])
+            if (_heightModel.Height > _heightModel.heightFlags[_heightModel.triggerIndex])
             {
                 _heightModel.GetBackgroundController.ChangeBackground(_heightModel.triggerIndex);
                 _heightModel.triggerIndex += 1;
@@ -44,17 +49,26 @@ public class HeightController
     private IEnumerator ScoreBooster(int multiplier)
     {
         yield return new WaitForSeconds(0.01f);
-        while (_heightModel.height <= 50 * multiplier)
+        while (_heightModel.Height <= 50 * multiplier * _heightModel.engineMultiplier)
         {
-            _heightModel.height += 1;
-            _heightModel.GetHUD.SetHeightText(_heightModel.height);
-            yield return new WaitForSeconds(0.035f / multiplier);
+            _heightModel.Height += 1;
+            yield return new WaitForSeconds(0.035f / (multiplier * _heightModel.engineMultiplier));
         }
     }
 
     public void UpdateTotalScore()
     {
-        _heightModel.GetHUD.SetTotalScoreText(_heightModel.height, _heightModel.recordHeight);
-        _heightModel.recordHeight = _heightModel.height > _heightModel.recordHeight ? _heightModel.height : _heightModel.recordHeight;
+        _heightModel.GetHUD.SetTotalScoreText(_heightModel.Height, _heightModel.recordHeight);
+        _heightModel.recordHeight = _heightModel.Height > _heightModel.recordHeight ? _heightModel.Height : _heightModel.recordHeight;
+    }
+
+    public void UpgradeEngine()
+    {
+        if (_heightModel.GetCoinModel.Coins >= _heightModel.engineMultiplier)
+        {
+            _heightModel.GetCoinModel.Coins -= _heightModel.engineMultiplier;
+            _heightModel.engineMultiplier += 1;
+            _heightModel.GetShopMenu.UpdateEngineText(_heightModel.engineMultiplier);
+        }
     }
 }

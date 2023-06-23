@@ -17,7 +17,10 @@ public class SaveController
     {
         PlayerPrefs.SetInt("RecordHeight", heightModel.recordHeight);
         PlayerPrefs.SetInt("EngineMultiplier", heightModel.engineMultiplier);
-        PlayerPrefs.SetInt("Coins", coinModel.coins);
-        PlayerPrefs.SetFloat("MaxFuel", fuelModel.MaxFuel);
+
+        PlayerPrefs.SetInt("Coins", coinModel.Coins);
+
+        PlayerPrefs.SetInt("FuelLevel", fuelModel._fuelLevel);
+        PlayerPrefs.SetFloat("MaxFuel", fuelModel._maxFuel);
     }
 }
