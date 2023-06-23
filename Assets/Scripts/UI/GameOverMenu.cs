@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class GameOverMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameOverMenu;
+    private GameObject _gameOverMenu;
+
+    private void Start()
+    {
+        _gameOverMenu = GetComponent<GameObject>();
+    }
     public void EnableGameOverMenu()
     {
         _gameOverMenu.SetActive(true);

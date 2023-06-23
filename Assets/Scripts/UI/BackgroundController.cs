@@ -9,7 +9,7 @@ public class BackgroundController : MonoBehaviour
 
     private int[] _heightFlags = {200, 500, 800, 1500};
 
-    private float transitionTime = 6f;
+    private float transitionTime = 3f;
 
     public void ChangeBackground(int index)
     {
@@ -30,11 +30,12 @@ public class BackgroundController : MonoBehaviour
     {
         float timeElapsed = 0f;
         float totalTime = transitionTime;
+        Color _currentColor = _colorBackground.color;
 
         while (timeElapsed < totalTime)
         {
             timeElapsed += Time.deltaTime;
-            _colorBackground.color = Color.Lerp(_colorBackground.color, _colors[index], timeElapsed / totalTime);
+            _colorBackground.color = Color.Lerp(_currentColor, _colors[index], timeElapsed / totalTime);
             yield return null;
         }
     }

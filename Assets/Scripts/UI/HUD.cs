@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUD : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private Text _fuelValue;
+    [SerializeField] private TextMeshProUGUI _fuelValue;
 
     [SerializeField] private Text _heightText;
     [SerializeField] private Text _totalScoreText;
