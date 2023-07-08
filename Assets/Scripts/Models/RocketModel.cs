@@ -5,6 +5,9 @@ public class RocketModel : MonoBehaviour
 {
     [Header("Movement data")]
     [SerializeField] [Range(0, 5)] private float _movementSpeed;
+    
+    [Header("Sprite data")]
+    [SerializeField] private SpriteRenderer _boundsSprite;
 
     private RocketMovement _rocketMovement;
     private Rigidbody2D _rigidbody;
@@ -24,6 +27,7 @@ public class RocketModel : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
 
         _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
         _objectWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
         _objectHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
 
