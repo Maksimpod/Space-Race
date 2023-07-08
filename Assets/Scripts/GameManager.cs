@@ -5,7 +5,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private PauseInterface _pauseInterface;
     [SerializeField] private HUD _hud;
-    
+    [SerializeField] private BoostController _boostController;
+
     private HeightModel _heightModel;
     private CoinModel _coinModel;
     private FuelModel _fuelModel;
@@ -15,10 +16,13 @@ public class GameManager : MonoBehaviour
     private bool gameStarted = false;
     private bool paused = false;
 
-    private void Start()
+    private void Awake()
     {
         Time.timeScale = 0;
+    }
 
+    private void Start()
+    {
         _heightModel = GetComponent<HeightModel>();
         _coinModel = GetComponent<CoinModel>();
         _fuelModel = GetComponent<FuelModel>();
@@ -35,7 +39,7 @@ public class GameManager : MonoBehaviour
             _hud.DeactivateStartButton();
             _hud.ChangeScoreText();
 
-            _heightModel.GetHeightController.BoostOnStart();
+            _heightModel.GetHeightController.BoostOnStart(_boostController.GetCurrentBoost());
         }
     }
     

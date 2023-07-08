@@ -16,10 +16,10 @@ public class HeightController
         _heightModel.GetShopMenu.UpdateEngineText(_heightModel.engineMultiplier);
     }
 
-    public void BoostOnStart()
+    public void BoostOnStart(int multi)
     {
-        _heightModel.StartCoroutine(ScoreBooster(_heightModel.multiplier));
-        _heightModel.GetHUD.DisableBoostButtons();
+        _heightModel.StartCoroutine(ScoreBooster(multi));
+        _heightModel.GetHUD.DisableBoostRoulette();
     }
 
     public IEnumerator Score()

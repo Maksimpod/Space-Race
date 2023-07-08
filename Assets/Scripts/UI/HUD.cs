@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private Text _coinsText;
 
-    [SerializeField] private List<GameObject> _boosts;
+    [SerializeField] private List<GameObject> _boostRoulette;
 
     [SerializeField] private GameObject _startButton;
 
@@ -53,12 +53,10 @@ public class HUD : MonoBehaviour
         _coinsText.text = Convert.ToString(coins);
     }
 
-    public void DisableBoostButtons ()
+    public void DisableBoostRoulette()
     {
-        for (int i = 0; i < _boosts.Count; i++)
-        {
-            _boosts[i].SetActive(false);
-        }
+        _boostRoulette[0].SetActive(false);
+        _boostRoulette[1].SetActive(false);
     }
     public void UpdateFuelHUD(float currFuel, float maxFuel)
     {
