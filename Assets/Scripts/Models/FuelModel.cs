@@ -25,10 +25,11 @@ public class FuelModel : MonoBehaviour
 
     public float CurrentFuel { 
         get { return _currentFuel; }
-        set {
-            _currentFuel = value;
+        set
+        {
+            _currentFuel = value > _maxFuel ? _maxFuel + 0.01f : value;
             _hud.UpdateFuelHUD(_currentFuel, _maxFuel);
-        } 
+        }
     }
     public float _maxFuel { get; set; } = 100f;
     public int _fuelLevel { get; set; } = 1;
@@ -38,9 +39,10 @@ public class FuelModel : MonoBehaviour
     {
         _fuelController = new FuelController(this);
 
-        _maxFuel = PlayerPrefs.GetFloat("MaxFuel");
-        _fuelLevel = PlayerPrefs.GetInt("FuelLevel");
-
+        _maxFuel = PlayerPrefs.GetFloat("MaxFuel", _maxFuel);
+        _fuelLevel = PlayerPrefs.GetInt("FuelLevel", _fuelLevel);
+        print(_maxFuel);
+        print(_fuelLevel);
         _currentFuel = _maxFuel;
 
         _fuelController.InitializeUpgradeButton();

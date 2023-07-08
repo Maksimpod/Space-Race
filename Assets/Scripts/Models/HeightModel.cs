@@ -48,8 +48,8 @@ public class HeightModel : MonoBehaviour
     {
         _heightController = new HeightController(this);
 
-        recordHeight = PlayerPrefs.GetInt("RecordHeight");
-        engineMultiplier = PlayerPrefs.GetInt("EngineMultiplier");
+        recordHeight = PlayerPrefs.GetInt("RecordHeight", recordHeight);
+        engineMultiplier = PlayerPrefs.GetInt("EngineMultiplier", engineMultiplier);
 
         _hud.SetRecordText(recordHeight);
 

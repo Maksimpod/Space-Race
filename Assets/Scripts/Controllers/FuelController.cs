@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,12 +19,12 @@ public class FuelController
 
     public void DecreaseFuel()
     {
-        _fuelModel.CurrentFuel -= _fuelModel._maxFuel / 5;
+        _fuelModel.StartCoroutine(ReduceFuel());
     }
 
     public void IncreaseFuel()
     {
-        _fuelModel.CurrentFuel = _fuelModel._maxFuel;
+        _fuelModel.StartCoroutine(RefillFuel());
     }
 
     public IEnumerator Fuel()
@@ -47,6 +48,26 @@ public class FuelController
             _fuelModel._maxFuel += 50;
             _fuelModel._fuelLevel += 1;
             _fuelModel.GetShopMenu.UpdateFuelText(_fuelModel._fuelLevel);
+        }
+    }
+
+    private IEnumerator RefillFuel()
+    {
+        while (_fuelModel.CurrentFuel < _fuelModel._maxFuel)
+        {
+            _fuelModel.CurrentFuel += _fuelModel._maxFuel / 50f;
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
+    private IEnumerator ReduceFuel()
+    {
+        double FuelReduced = 0;
+        while (FuelReduced < _fuelModel._maxFuel / 5 - 0.1f)
+        {
+            _fuelModel.CurrentFuel -= _fuelModel._maxFuel / 250f;
+            FuelReduced += _fuelModel._maxFuel / 250;
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }
