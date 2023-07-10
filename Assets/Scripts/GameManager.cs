@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     private SaveController _saveController;
 
-    private bool gameStarted = false;
     private bool paused = false;
 
     private void Awake()
@@ -32,15 +31,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        if (!gameStarted)
-        {
-            gameStarted = true;
-            Time.timeScale = 1;
-            _hud.DeactivateStartButton();
-            _hud.ChangeScoreText();
+        Time.timeScale = 1;
+        _hud.StartGameGUI();
 
-            _heightModel.GetHeightController.BoostOnStart(_boostController.GetCurrentBoost());
-        }
+        _heightModel.GetHeightController.BoostOnStart(_boostController.GetCurrentBoost());
     }
     
     public void Restart()
@@ -55,13 +49,12 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             paused = true;
-            _pauseInterface.Pause(paused);
         }
         else
         {
             Time.timeScale = 1;
             paused = false;
-            _pauseInterface.Pause(paused);
         }
+        _pauseInterface.Pause(paused);
     }
 }

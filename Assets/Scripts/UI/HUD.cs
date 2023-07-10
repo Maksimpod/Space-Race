@@ -19,6 +19,8 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private GameObject _startButton;
 
+    [SerializeField] private GameObject _pauseButton;
+
     public void SetRecordText(int height)
     {
         _recordScoreText.text = "Record: " + height + "m";
@@ -41,11 +43,17 @@ public class HUD : MonoBehaviour
             _totalScoreText.text = "Your score: " + height + "m";
         }
     }
-
     public void ChangeScoreText()
     {
         _heightText.gameObject.SetActive(true);
         _recordScoreText.gameObject.SetActive(false);
+    }
+
+    public void StartGameGUI()
+    {
+        DeactivateStartButton();
+        ChangeScoreText();
+        ActivatePauseButton();
     }
 
     public void UpdateCoinText(int coins)
@@ -64,8 +72,13 @@ public class HUD : MonoBehaviour
         _fuelValue.text = Convert.ToString(currFuel > 0 ? Math.Round(currFuel / maxFuel * 100, 1) : 0);
     }
     
-    public void DeactivateStartButton()
+    private void DeactivateStartButton()
     {
         _startButton.SetActive(false);
+    }
+
+    private void ActivatePauseButton()
+    {
+        _pauseButton.SetActive(true);
     }
 }
