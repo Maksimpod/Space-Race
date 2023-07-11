@@ -19,12 +19,25 @@ public class FuelController
 
     public void DecreaseFuel()
     {
-        _fuelModel.StartCoroutine(ReduceFuel());
+        if (_fuelModel.FuelLeak == 0)
+        {
+            _fuelModel.GetHud.ActivateLeakText(true);
+        }
+        _fuelModel.FuelLeak += 0.3f;
     }
 
     public void IncreaseFuel()
     {
         _fuelModel.StartCoroutine(RefillFuel());
+    }
+
+    public void RepairLeak()
+    {
+        _fuelModel.FuelLeak -= 0.3f;
+        if (_fuelModel.FuelLeak == 0)
+        {
+            _fuelModel.GetHud.ActivateLeakText(false);
+        }
     }
 
     public IEnumerator Fuel()
@@ -33,11 +46,12 @@ public class FuelController
 
         while (_fuelModel.CurrentFuel > 0f)
         {
-            _fuelModel.CurrentFuel -= 0.5f;
+            _fuelModel.CurrentFuel -= 0.5f + _fuelModel.FuelLeak;
             yield return new WaitForSeconds(0.2f);
         }
         _fuelModel.GameOverMenu.EnableGameOverMenu();
         _fuelModel.GetHeightModel.GetHeightController.UpdateTotalScore();
+        _fuelModel.GetCoinModel.GetCoinController.CalculateCoins();
     }
 
     public void UpgradeFuel()

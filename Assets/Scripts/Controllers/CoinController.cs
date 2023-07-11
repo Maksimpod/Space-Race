@@ -11,4 +11,9 @@ public class CoinController
     {
         _coinModel.Coins += 1;
     }
+
+    public void CalculateCoins()
+    {
+        _coinModel.Coins += _coinModel.GetHeightModel.Height / _coinModel.GetHeightModel.RokValue / _coinModel.RokCoinScale;
+    }
 }

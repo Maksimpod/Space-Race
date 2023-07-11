@@ -18,6 +18,8 @@ public class HeightModel : MonoBehaviour
 
     [SerializeField] private CoinModel _coinModel;
 
+    [SerializeField] private int _rokValue = 15;
+
     private HeightController _heightController;
 
     private int _height = 0;
@@ -29,6 +31,7 @@ public class HeightModel : MonoBehaviour
     public BackgroundController GetBackgroundController => _backgroundController;
     public Button EngineUpgradeButton => _engineUpgradeButton;
     public CoinModel GetCoinModel => _coinModel;
+    public int RokValue => _rokValue;
 
     public int Height { 
         get {
@@ -36,7 +39,7 @@ public class HeightModel : MonoBehaviour
         } 
         set {
             _height = value;
-            _hud.SetHeightText(_height);
+            _hud.SetHeightText(_height / _rokValue);
         } 
     }
     public int recordHeight { get; set; } = 0;
@@ -51,7 +54,7 @@ public class HeightModel : MonoBehaviour
         recordHeight = PlayerPrefs.GetInt("RecordHeight", recordHeight);
         engineMultiplier = PlayerPrefs.GetInt("EngineMultiplier", engineMultiplier);
 
-        _hud.SetRecordText(recordHeight);
+        _hud.SetRecordText(recordHeight / _rokValue);
 
         _heightController.InitializeUpgradeButton();
 
