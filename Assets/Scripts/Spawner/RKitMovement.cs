@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class RKitMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
@@ -29,10 +31,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _fuelModel.GetFuelController.DecreaseFuel();
-        /*if (collision.gameObject.name == "Body" || collision.gameObject.name == "Tail")
+        if (collision.gameObject.CompareTag("Player") && _fuelModel.FuelLeak > 0f)
         {
-        }*/
-        gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            _fuelModel.GetFuelController.RepairLeak();
+        }
     }
 }
