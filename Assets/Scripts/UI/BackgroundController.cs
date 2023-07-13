@@ -5,9 +5,8 @@ public class BackgroundController : MonoBehaviour
 {
     [SerializeField] private Color[] _colors;
     [SerializeField] private SpriteRenderer _colorBackground;
+    [SerializeField] private Sprite _spriteBG;
     [SerializeField] private Renderer _spriteBackground;
-
-    private int[] _heightFlags = {200, 500, 800, 1500};
 
     private float transitionTime = 3f;
 
@@ -47,5 +46,11 @@ public class BackgroundController : MonoBehaviour
             _spriteBackground.material.mainTextureOffset += new Vector2(0, 0.02f * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public void SetBackgroundDistance(float z)
+    {
+        var spritePosition = _spriteBackground.gameObject.transform.position;
+        _spriteBackground.gameObject.transform.position = new Vector3(spritePosition.x, spritePosition.y, z);
     }
 }

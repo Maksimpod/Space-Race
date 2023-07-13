@@ -7,9 +7,12 @@ public class GameOverMenu : MonoBehaviour
 
     [SerializeField]  private RawImage _screenShootImage;
 
+    [SerializeField] private BackgroundController _backgroundController;
+
     public void EnableGameOverMenu()
     {
         gameObject.SetActive(true);
+        _backgroundController.SetBackgroundDistance(0f);
         CaptureScreen();
     }
 
@@ -26,5 +29,6 @@ public class GameOverMenu : MonoBehaviour
         RenderTexture.active = null;
 
         _screenShootImage.texture = renderedTexture;
+        _backgroundController.SetBackgroundDistance(100f);
     }
 }
