@@ -1,3 +1,4 @@
+using RS2023.Scripts.Controllers;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -5,13 +6,15 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Rigidbody2D _rigidbody;
-    private FuelModel _fuelModel;
+    private FuelController _fuelModel;
+    private RocketMovement _rocketModel;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
 
-        _fuelModel = FindObjectOfType<FuelModel>();
+        _fuelModel = FindObjectOfType<FuelModel>().GetFuelController;
+        _rocketModel = FindObjectOfType<RocketModel>().GetMovementController;
     }
 
     private void FixedUpdate()
@@ -29,7 +32,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _fuelModel.GetFuelController.DecreaseFuel();
+        _fuelModel.DecreaseFuel();
+        _rocketModel.DecreaseSpeed();
         /*if (collision.gameObject.name == "Body" || collision.gameObject.name == "Tail")
         {
         }*/

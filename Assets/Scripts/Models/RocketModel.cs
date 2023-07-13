@@ -16,11 +16,20 @@ public class RocketModel : MonoBehaviour
     private float _objectWidth;
     private float _objectHeight;
 
-    public float MovementSpeed => _movementSpeed;
+    public float MovementSpeed { 
+        get {
+            return _movementSpeed;
+        }
+        set { 
+            _movementSpeed = value; 
+        }
+    }
     public Rigidbody2D GetRigidbody2D => _rigidbody;
     public Vector2 GetScreenBounds => _screenBounds;
     public float GetRocketWidth => _objectWidth;
     public float GetRocketHeight => _objectHeight;
+
+    public RocketMovement GetMovementController => _rocketMovement;
 
     private void Start()
     {

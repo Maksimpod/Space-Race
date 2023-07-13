@@ -1,15 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class RocketMovement 
 {
     private RocketModel _rocketModel;
     private Rigidbody2D rigidBody;
+    private Vector2 screenBounds;
 
     public RocketMovement(RocketModel rocketModel)
     {
         _rocketModel = rocketModel;
 
         rigidBody = _rocketModel.GetRigidbody2D;
+        screenBounds = _rocketModel.GetScreenBounds;
     }
 
     public void Movement()
@@ -24,6 +27,7 @@ public class RocketMovement
         {
             Touch touch = Input.GetTouch(0);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
             if (touchPosition.x > _rocketModel.transform.position.x) {
                 rigidBody.velocity = new Vector2(_rocketModel.MovementSpeed, 0f);
             }
@@ -41,8 +45,19 @@ public class RocketMovement
     public void GetBorders()
     {
         Vector3 viewPos = _rocketModel.transform.position;
-        viewPos.x = Mathf.Clamp(viewPos.x, _rocketModel.GetScreenBounds.x * -1 + _rocketModel.GetRocketWidth, _rocketModel.GetScreenBounds.x - _rocketModel.GetRocketWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, _rocketModel.GetScreenBounds.y * -1 + _rocketModel.GetRocketHeight, _rocketModel.GetScreenBounds.y - _rocketModel.GetRocketHeight);
+        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + _rocketModel.GetRocketWidth, screenBounds.x - _rocketModel.GetRocketWidth);
+        viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + _rocketModel.GetRocketHeight, screenBounds.y - _rocketModel.GetRocketHeight);
         _rocketModel.transform.position = viewPos;
+    }
+
+    public void DecreaseSpeed()
+    {
+        _rocketModel.StartCoroutine(DecreaseSpeedCoroutine());
+    }
+
+    public IEnumerator DecreaseSpeedCoroutine() {
+        _rocketModel.MovementSpeed /= 2f;
+        yield return new WaitForSeconds(1f);
+        _rocketModel.MovementSpeed *= 2f;
     }
 }
