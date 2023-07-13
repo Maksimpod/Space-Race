@@ -4,18 +4,17 @@ using UnityEngine.UI;
 public class FuelModel : MonoBehaviour
 {
     [Header("Links")]
-    [SerializeField] private GameOverMenu _gameOverMenu;
     [SerializeField] private HUD _hud;
     [SerializeField] private UIShop _shopMenu;
     [SerializeField] private HeightModel _heightModel;
     [SerializeField] private Button _fuelUpgradeButton;
     [SerializeField] private CoinModel _coinModel;
+    [SerializeField] private GameManager _gameManager;
 
     private FuelController _fuelController;
 
     private float _currentFuel = 100f;
 
-    public GameOverMenu GameOverMenu => _gameOverMenu;
     public HUD GetHud => _hud;
     public UIShop GetShopMenu => _shopMenu;
     public HeightModel GetHeightModel => _heightModel;
@@ -23,6 +22,7 @@ public class FuelModel : MonoBehaviour
     public Button FuelUpgradeButton => _fuelUpgradeButton;
 
     public CoinModel GetCoinModel => _coinModel;
+    public GameManager GetGameManager => _gameManager;
 
     public float CurrentFuel { 
         get { return _currentFuel; }

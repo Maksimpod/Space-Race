@@ -49,9 +49,7 @@ public class FuelController
             _fuelModel.CurrentFuel -= 0.5f + _fuelModel.FuelLeak;
             yield return new WaitForSeconds(0.2f);
         }
-        _fuelModel.GameOverMenu.EnableGameOverMenu();
-        _fuelModel.GetHeightModel.GetHeightController.UpdateTotalScore();
-        _fuelModel.GetCoinModel.GetCoinController.CalculateCoins();
+        _fuelModel.GetGameManager.StopGame();
     }
 
     public void UpgradeFuel()

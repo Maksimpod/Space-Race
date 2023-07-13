@@ -37,6 +37,7 @@ public class RocketModel : MonoBehaviour
     private void FixedUpdate()
     {
         _rocketMovement.Movement();
+        //_rocketMovement.TouchMovement();
     }
 
     private void LateUpdate()

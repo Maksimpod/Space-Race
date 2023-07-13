@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PauseInterface _pauseInterface;
     [SerializeField] private HUD _hud;
     [SerializeField] private BoostController _boostController;
+    [SerializeField] private GameOverMenu _gameOverMenu;
+
+    [SerializeField] private AlienController _alienController;
 
     private HeightModel _heightModel;
     private CoinModel _coinModel;
@@ -35,6 +39,20 @@ public class GameManager : MonoBehaviour
         _hud.StartGameGUI();
 
         _heightModel.GetHeightController.BoostOnStart(_boostController.GetCurrentBoost());
+    }
+
+    public void StopGame()
+    {
+        _alienController.PushAlien();
+        StartCoroutine(StopGameCoroutine());
+    }
+    private IEnumerator StopGameCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
+        _gameOverMenu.EnableGameOverMenu();
+        _heightModel.GetHeightController.UpdateTotalScore();
+        _coinModel.GetCoinController.CalculateCoins();
+        Time.timeScale = 0;
     }
     
     public void Restart()
