@@ -1,19 +1,23 @@
-public class CoinController
+namespace RS2023.Scripts.Controllers
 {
-    private CoinModel _coinModel;
-
-    public CoinController(CoinModel coinModel)
+    public class CoinController
     {
-        _coinModel = coinModel;
+        private CoinModel _coinModel;
+
+        public CoinController(CoinModel coinModel)
+        {
+            _coinModel = coinModel;
+        }
+
+        public void UpdateCoins()
+        {
+            _coinModel.Coins += 1;
+        }
+
+        public void CalculateCoins()
+        {
+            _coinModel.Coins += _coinModel.GetHeightModel.Height / _coinModel.GetHeightModel.RokValue / _coinModel.RokCoinScale;
+        }
     }
 
-    public void UpdateCoins()
-    {
-        _coinModel.Coins += 1;
-    }
-
-    public void CalculateCoins()
-    {
-        _coinModel.Coins += _coinModel.GetHeightModel.Height / _coinModel.GetHeightModel.RokValue / _coinModel.RokCoinScale;
-    }
 }

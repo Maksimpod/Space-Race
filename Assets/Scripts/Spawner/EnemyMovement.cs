@@ -32,11 +32,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _fuelModel.DecreaseFuel();
-        _rocketModel.DecreaseSpeed();
-        /*if (collision.gameObject.name == "Body" || collision.gameObject.name == "Tail")
+        if (collision.gameObject.name == "Head" || collision.gameObject.name == "Body" || collision.gameObject.name == "Tail" || collision.gameObject.name == "Wings")
         {
-        }*/
+            _fuelModel.DecreaseFuel();
+            _rocketModel.DecreaseSpeed();
+        }
         gameObject.SetActive(false);
     }
 }

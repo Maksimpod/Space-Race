@@ -1,3 +1,4 @@
+using RS2023.Scripts.Controllers;
 using UnityEngine;
 
 public class CoinModel : MonoBehaviour

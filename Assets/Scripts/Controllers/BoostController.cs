@@ -1,56 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostController : MonoBehaviour
+namespace RS2023.Scripts.Controllers
 {
-    [SerializeField] private float _rotateSpeed;
-    [SerializeField] private GameObject pivot;
-
-    private bool cycle = false;
-
-    private void Update()
+    public class BoostController : MonoBehaviour
     {
-        if (gameObject.transform.eulerAngles.z > 270f)
+        [SerializeField] private float _rotateSpeed;
+        [SerializeField] private GameObject pivot;
+
+        private bool cycle = false;
+
+        private void Update()
         {
-            cycle = true;
-        }
-        else if (gameObject.transform.eulerAngles.z >= 180f)
-        {
-            cycle = false;
+            if (gameObject.transform.eulerAngles.z > 270f)
+            {
+                cycle = true;
+            }
+            else if (gameObject.transform.eulerAngles.z >= 180f)
+            {
+                cycle = false;
+            }
+
+            if (cycle == false)
+            {
+                transform.RotateAround(pivot.transform.position, Vector3.back, _rotateSpeed);
+            }
+            else
+            {
+                transform.RotateAround(pivot.transform.position, Vector3.forward, _rotateSpeed);
+            }
         }
 
-        if (cycle == false)
+        public int GetCurrentBoost()
         {
-            transform.RotateAround(pivot.transform.position, Vector3.back, _rotateSpeed);
+            int multiplier = 0;
+
+            if (gameObject.transform.eulerAngles.z >= 145f || gameObject.transform.eulerAngles.z <= 35f)
+            {
+                multiplier = 1;
+            }
+            else if (gameObject.transform.eulerAngles.z >= 110f || gameObject.transform.eulerAngles.z <= 65f)
+            {
+                multiplier = 3;
+            }
+            else
+            {
+                multiplier = 5;
+            }
+
+            return multiplier;
         }
-        else
-        {
-            transform.RotateAround(pivot.transform.position, Vector3.forward, _rotateSpeed);
-        }
+
+        // green 145:180 ; 0:35
+        // yellow 110:145 ; 35:65
+        // red : 65:110;
     }
 
-    public int GetCurrentBoost()
-    {
-        int multiplier = 0;
-
-        if (gameObject.transform.eulerAngles.z >= 145f || gameObject.transform.eulerAngles.z <= 35f)
-        {
-            multiplier = 1;
-        }
-        else if (gameObject.transform.eulerAngles.z >= 110f || gameObject.transform.eulerAngles.z <= 65f)
-        {
-            multiplier = 2;
-        }
-        else
-        {
-            multiplier = 3;
-        }
-
-        return multiplier;
-    }
-
-    // green 145:180 ; 0:35
-    // yellow 110:145 ; 35:65
-    // red : 65:110;
 }
